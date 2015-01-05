@@ -32,10 +32,11 @@ import com.tealium.net.annotation.ThreadScope;
 import com.tealium.net.exception.FileDistributorException;
 import com.tealium.net.exception.FileDistributorException.Error;
 
-@ThreadSafe 
+@ThreadSafe
 @ThreadScope
 public class S3FileDistributorImpl implements S3FileDistributor {
-	private static Logger logger = LoggerFactory.getLogger(S3FileDistributorImpl.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(S3FileDistributorImpl.class);
 
 	private final Map<String, String> connParams;
 
@@ -44,7 +45,8 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	public S3FileDistributorImpl(Map<String, String> connParams) {
 		this.connParams = connParams;
 
-		AWSCredentials credentials = new BasicAWSCredentials(connParams.get(ACCESS_KEY_ID), connParams.get(ACCESS_KEY));
+		AWSCredentials credentials = new BasicAWSCredentials(
+				connParams.get(ACCESS_KEY_ID), connParams.get(ACCESS_KEY));
 
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setProtocol(Protocol.HTTPS);
@@ -64,18 +66,18 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 
 	@Override
 	public boolean isAuthenticated() {
- 
+
 		return false;
 	}
 
 	@Override
-	public void abortCurrentDataTransfer(boolean sendAbortCommand) throws FileDistributorException {
+	public void abortCurrentDataTransfer(boolean sendAbortCommand)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
 
 	}
-
 
 	@Override
 	public boolean isConnected() {
@@ -109,7 +111,6 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 		return null;
 	}
 
-
 	@Override
 	public void abruptlyCloseCommunication() {
 		if (true) {
@@ -129,7 +130,7 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	@Override
 	public String currentDirectory() throws FileDistributorException {
 		List<Bucket> listBuckets = s3Client.listBuckets();
-		return listBuckets!=null?""+listBuckets.indexOf(0):"";
+		return listBuckets != null ? "" + listBuckets.indexOf(0) : "";
 	}
 
 	@Override
@@ -144,7 +145,7 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	public void changeDirectoryUp() throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
-		} 
+		}
 	}
 
 	@Override
@@ -164,7 +165,8 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void rename(String oldPath, String newPath) throws FileDistributorException {
+	public void rename(String oldPath, String newPath)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -188,16 +190,17 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void createDirectory(String directoryName) throws FileDistributorException {
+	public void createDirectory(String directoryName)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
 
 	}
 
-
 	@Override
-	public Collection<FileMetaData> list(String fileSpec) throws FileDistributorException {
+	public Collection<FileMetaData> list(String fileSpec)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -221,44 +224,24 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void upload(File localFile,String remoteFileName,String bucketName) throws FileDistributorException {
-		 
+	public void upload(File localFile, String remoteFileName, String bucketName)
+			throws FileDistributorException {
+
 		ByteArrayInputStream input;
 		try {
-			input = new ByteArrayInputStream( FileUtils.readFileToByteArray(localFile));
-			s3Client.putObject(bucketName, remoteFileName, input, new ObjectMetadata());
+			input = new ByteArrayInputStream(
+					FileUtils.readFileToByteArray(localFile));
+			s3Client.putObject(bucketName, remoteFileName, input,
+					new ObjectMetadata());
 		} catch (IOException e) {
-			logger.error("Error to upload - " + localFile + "|remotefile-" + remoteFileName+"|"+bucketName, e);
+			logger.error("Error to upload - " + localFile + "|remotefile-"
+					+ remoteFileName + "|" + bucketName, e);
 			throw new FileDistributorException(getError(e));
 		}
 	}
 
 	@Override
-	public void upload(File file, DataTransferListener listener) throws FileDistributorException {
-		if (true) {
-			throw new IllegalArgumentException("Not implemented");
-		}
-
-	}
-
-	@Override
-	public void upload(File file, long restartAt) throws FileDistributorException {
-		if (true) {
-			throw new IllegalArgumentException("Not implemented");
-		}
-
-	}
-
-	@Override
-	public void upload(File file, long restartAt, DataTransferListener listener) throws FileDistributorException {
-		if (true) {
-			throw new IllegalArgumentException("Not implemented");
-		}
-
-	}
-
-	@Override
-	public void upload(String fileName, InputStream inputStream, long restartAt, long streamOffset, DataTransferListener listener)
+	public void upload(File file, DataTransferListener listener)
 			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
@@ -267,7 +250,36 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public boolean uploadAndRemoveLocal(File file) throws FileDistributorException {
+	public void upload(File file, long restartAt)
+			throws FileDistributorException {
+		if (true) {
+			throw new IllegalArgumentException("Not implemented");
+		}
+
+	}
+
+	@Override
+	public void upload(File file, long restartAt, DataTransferListener listener)
+			throws FileDistributorException {
+		if (true) {
+			throw new IllegalArgumentException("Not implemented");
+		}
+
+	}
+
+	@Override
+	public void upload(String fileName, InputStream inputStream,
+			long restartAt, long streamOffset, DataTransferListener listener)
+			throws FileDistributorException {
+		if (true) {
+			throw new IllegalArgumentException("Not implemented");
+		}
+
+	}
+
+	@Override
+	public boolean uploadAndRemoveLocal(File file)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -275,7 +287,8 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void append(File file, DataTransferListener listener) throws FileDistributorException {
+	public void append(File file, DataTransferListener listener)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -283,7 +296,9 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void append(String fileName, InputStream inputStream, long streamOffset, DataTransferListener listener) throws FileDistributorException {
+	public void append(String fileName, InputStream inputStream,
+			long streamOffset, DataTransferListener listener)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -299,8 +314,10 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public boolean download(String remoteFileName, File localFile, String remotePath) throws FileDistributorException {
-		ObjectMetadata objectMetaData = s3Client.getObject(new GetObjectRequest(remotePath, remoteFileName), localFile);
+	public boolean download(String remoteFileName, File localFile,
+			String remotePath) throws FileDistributorException {
+		ObjectMetadata objectMetaData = s3Client.getObject(
+				new GetObjectRequest(remotePath, remoteFileName), localFile);
 		if (logger.isDebugEnabled()) {
 			logger.debug("downloaded file: " + objectMetaData);
 		}
@@ -309,7 +326,8 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void download(String remoteFileName, File localFile, DataTransferListener listener) throws FileDistributorException {
+	public void download(String remoteFileName, File localFile,
+			DataTransferListener listener) throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -317,7 +335,8 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void download(String remoteFileName, File localFile, long restartAt) throws FileDistributorException {
+	public void download(String remoteFileName, File localFile, long restartAt)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -325,7 +344,8 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void download(String remoteFileName, File localFile, long restartAt, DataTransferListener listener) throws FileDistributorException {
+	public void download(String remoteFileName, File localFile, long restartAt,
+			DataTransferListener listener) throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
@@ -333,13 +353,14 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 	}
 
 	@Override
-	public void download(String fileName, OutputStream outputStream, long restartAt, DataTransferListener listener) throws FileDistributorException {
+	public void download(String fileName, OutputStream outputStream,
+			long restartAt, DataTransferListener listener)
+			throws FileDistributorException {
 		if (true) {
 			throw new IllegalArgumentException("Not implemented");
 		}
 
 	}
-
 
 	@Override
 	public void upload(File file) throws FileDistributorException {
@@ -354,7 +375,7 @@ public class S3FileDistributorImpl implements S3FileDistributor {
 
 		if (e.getClass().isAssignableFrom(IOException.class)) {
 			return Error.IOException;
-		} 
+		}
 
 		return Error.Unknown;
 
